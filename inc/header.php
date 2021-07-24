@@ -1,3 +1,13 @@
+<?php
+    @session_start();
+    // $_SESSION['user'] = 'Me';
+    if(isset($_SESSION['user'])) {
+        $session = $_SESSION['user'];
+    } else {
+        $session = null;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,5 +26,34 @@
 </head>
 <body>
     <header>
-    
+        <div class="container">
+            <div class="row">
+                <a href="#" class="logo">PhotoGallery</a>
+                <nav>
+                    <button>
+                        
+                    </button>
+                    <div class="" id="">
+                        <ul>
+                            <li><a href="">Home</a></li>
+                            <li><a href="">Gallery</a></li>
+                            <li><a href="">About</a></li>
+                            <li><a href="">Contact</a></li>
+                            <?php
+                                if($session == null) {
+                            ?>
+                                <li><a href="">Login</a></li>
+                                <li><a href="">Register</a></li>
+                            <?php
+                                } else {
+                            ?>
+                                <li><a href="">Logout</a></li>
+                            <?php
+                                }
+                            ?>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
     </header>

@@ -26,6 +26,10 @@ a:hover {
     color: #ff9955;
 }
 
+ul {
+    list-style: none;
+}
+
 .bold {
     font-weight: 700;
 }
@@ -71,7 +75,7 @@ a:hover {
 }
 
 .green-bg {
-    color: #27ae60;
+    background-color: #27ae60;
 }
 
 .section-header {

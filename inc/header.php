@@ -1,6 +1,5 @@
 <?php
     @session_start();
-    // $_SESSION['user'] = 'Me';
     if(isset($_SESSION['user'])) {
         $session = $_SESSION['user'];
     } else {
@@ -21,20 +20,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <script type="text/javascript" src="js/jquery.min.js"></script>
 </head>
 <body>
     <header>
         <div class="container">
             <div class="row">
-                <a href="#" class="logo">PhotoGallery</a>
-                <nav>
-                    <button>
-                        
+                <a href="#" class="logo pull-left">PhotoGallery</a>
+                <nav class="pull-right right">
+                    <button type="button" class="btn green-bg" data-toggle="collapse" data-target="#menu">
+                        <i class="fa fa-navicon"></i>
                     </button>
-                    <div class="" id="">
-                        <ul>
+                    <div class="collapse" id="menu">
+                        <ul class="center">
                             <li><a href="">Home</a></li>
                             <li><a href="">Gallery</a></li>
                             <li><a href="">About</a></li>
@@ -42,12 +41,12 @@
                             <?php
                                 if($session == null) {
                             ?>
-                                <li><a href="">Login</a></li>
-                                <li><a href="">Register</a></li>
+                                <li class="login"><a href="" class="blue-bg">Login</a></li>
+                                <li class="register"><a href="" class="primary-bg">Register</a></li>
                             <?php
                                 } else {
                             ?>
-                                <li><a href="">Logout</a></li>
+                                <li class="logout"><a href="" class="primary-bg">Logout</a></li>
                             <?php
                                 }
                             ?>

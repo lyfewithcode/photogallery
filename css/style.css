@@ -156,3 +156,9 @@ input[type=submit] {
     text-align: center;
     padding: 0px;
 }
+
+/* for profile info section */
+
+.profile-information {
+    margin-top: 30px;
+}

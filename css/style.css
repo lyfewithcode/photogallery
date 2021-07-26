@@ -127,3 +127,32 @@ canvas {
 .transparent-bg {
     background-color: rgba(0, 0, 0, 0.6);
 }
+
+/* form styling */
+
+form {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+form input, form textarea {
+    display: block;
+    margin-bottom: 40px;
+    width: 100%;
+    padding-left: 20px;
+}
+
+form textarea {
+    padding-top: 10px;
+}
+
+form input {
+    height: 40px;
+}
+
+input[type=submit] {
+    width: 30%;
+    text-align: center;
+    padding: 0px;
+}

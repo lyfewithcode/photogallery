@@ -7,4 +7,16 @@ jQuery(document).ready(function() {
         separator: ",", // If you don't want commas to be the separator, you can define a new separator (|, &, * etc.) by yourself using this field.
         speed: 2000 // How many milliseconds until the next word show.
     });
+
+    $(window).scroll(function() {
+        var top = $(window).scrollTop();
+        if(top >= 70) {
+            $("header").addClass('transparent-bg');
+        } else {
+            if($("header").hasClass('transparent-bg')) {
+                $("header").removeClass('transparent-bg')
+            }
+        }
+    })
+
 });

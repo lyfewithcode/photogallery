@@ -28,9 +28,9 @@
     <header>
         <div class="container">
             <div class="row">
-                <a href="#" class="logo pull-left">PhotoGallery</a>
+                <a href="#" class="logo pull-left bold">Photo<span class="primary">G</span>allery</a>
                 <nav class="pull-right right">
-                    <button type="button" class="btn green-bg" data-toggle="collapse" data-target="#menu">
+                    <button type="button" class="btn" data-toggle="collapse" data-target="#menu">
                         <i class="fa fa-navicon"></i>
                     </button>
                     <div class="collapse" id="menu">

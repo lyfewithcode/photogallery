@@ -1,6 +1,6 @@
 <?php
     include 'inc/header.php';
     include 'inc/slider.php';
-    echo 'login';
+    include 'inc/login-form.php';
     include 'inc/footer.php';
 ?>

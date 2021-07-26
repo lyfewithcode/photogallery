@@ -6,13 +6,13 @@
     <div class="container">
         <div class="row">
             <form method="post" id="register-form" action="register.php">
-            <input type="text" name="fname" id="fname" placeholder="Enter First Name">
-            <input type="text" name="lname" id="lname" placeholder="Enter Last Name">
-            <input type="text" name="username" id="username" placeholder="Choose a Username">
-            <input type="email" name="email" id="email" placeholder="Enter your email address">
+            <input type="text" name="fname" id="fname" placeholder="Enter First Name" value="<?php if(isset($_POST['fname'])){echo $_POST['fname'];} ?>">
+            <input type="text" name="lname" id="lname" placeholder="Enter Last Name" value="<?php if(isset($_POST['lname'])){echo $_POST['lname'];} ?>">
+            <input type="text" name="username" id="username" placeholder="Choose a Username" value="<?php if(isset($_POST['username'])){echo $_POST['username'];} ?>">
+            <input type="email" name="email" id="email" placeholder="Enter your email address" value="<?php if(isset($_POST['email'])){echo $_POST['email'];} ?>">
             <input type="password" name="password" id="password" placeholder="Enter your Password here">
             <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm your Password here">
-            <textarea name="bio" id="bio" placeholder="Enter your Bio here (Optional)"></textarea>
+            <textarea name="bio" id="bio" placeholder="Enter your Bio here (Optional)" value="<?php if(isset($_POST['bio'])){echo $_POST['bio'];} ?>"></textarea>
             <input type="submit" name="submit" id="submit" value="Register" class="primary-bg white">
             </form>
             <div id="error">
@@ -26,6 +26,7 @@
 </section>
 
 <?php
+    include 'db.inc.php';
 
     $fname = "";
     $lname = "";
@@ -36,6 +37,28 @@
     $uploads = 0;
     $id = "";
     $error = array();
+
+    function register($id, $fname, $lname, $username, $email, $password, $bio, $uploads) {
+        
+        $conn = @mysqli_connect('localhost', 'root', '', 'photogallery');
+        
+        $newpwd = md5($password);
+        $query = "INSERT INTO users VALUES('$id', '$fname', '$lname', '$username', '$email', '$newpwd', '$bio', '$uploads')";
+
+        if(mysqli_query($conn, $query)) {
+            ?>
+            <script type="text/javascript">
+                $('#success').append("You have been registered successfully. <a href='login.php'>Click here to Login</a>");
+            </script>
+            <?php
+        } else {
+            ?>
+            <script type="text/javascript">
+                $('#error').append("Error registering");
+            </script>
+            <?php
+        }
+    }
 
     function sanitize($data) {
         $data = trim($data);
@@ -114,21 +137,21 @@
 
         if(count($error) == 0) {
             $checkusername = "SELECT * FROM users WHERE username = '$username'";
-            $runqueryusername = mysqli_query($checkusername);
+            $runqueryusername = mysqli_query($conn, $checkusername);
 
             $checkemail = "SELECT * FROM users WHERE email = '$email'";
-            $runqueryemail = mysqli_query($checkemail);
+            $runqueryemail = mysqli_query($conn, $checkemail);
 
             if(mysqli_num_rows($runqueryusername) > 0) {
                 ?>
                 <script type="text/javascript">
-                    $('#error').append("<?php echo 'Username Exists'; ?>")
+                    $('#error').append("<?php echo 'Username Exists'; ?>");
                 </script>
                 <?php
             } elseif(mysqli_num_rows($runqueryemail) > 0) {
                 ?>
                 <script type="text/javascript">
-                    $('#error').append("<?php echo 'Email Exists'; ?>")
+                    $('#error').append("<?php echo 'Email Exists'; ?>");
                 </script>
                 <?php
             } else {
@@ -138,11 +161,10 @@
             foreach($error as $key => $value) {
                 ?>
                 <script type="text/javascript">
-                    $('#error').append("<?php echo $value.'<br>'; ?>")
+                    $('#error').append("<?php echo $value.'<br>'; ?>");
                 </script>
                 <?php
             }
         }
-
     }
 ?>

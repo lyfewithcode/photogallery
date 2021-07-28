@@ -35,4 +35,41 @@
             }
         }
     }
+
+    function get_avatar_image($user) {
+        $upload_folder = "uploads";
+        $user_folder = $upload_folder.'/'.$user;
+        $avatar_image_folder = $user_folder.'/avatar';
+
+        if(is_dir($upload_folder)) {
+            if(is_dir($user_folder)) {
+
+            } else {
+                mkdir($user_folder);
+            }
+        } else {
+            mkdir($upload_folder);
+            if(is_dir($user_folder)) {
+                
+            } else {
+                mkdir($user_folder);
+            }
+        }
+
+        if(is_dir($avatar_image_folder)) {
+
+        } else {
+            mkdir($avatar_image_folder);
+        }
+
+        if($handle = opendir($avatar_image_folder)) {
+            while(false !== ($entry = readdir($handle))) {
+                if(($entry != '.') and ($entry != '..')) {
+                    $avatar_image_path = $avatar_image_folder.'/'.$entry;
+                    echo "<img src=$avatar_image_path alt=$entry id=$avatar_image_id width='300px'>";
+                }
+            }
+            closedir($handle);
+        }
+    }
 ?>

@@ -10,6 +10,10 @@
         <div class="row">
             <div class="col-md-4 avatar">
                 <h2>Avatar</h2>
+                <?php get_avatar_image($session); ?>
+                <div class="upload-avatar">
+                    <input type="file" name="user-avatar-upload" id="user-avatar-upload">
+                </div>
             </div>
             <div class="col-md-8 profile">
                 <h2>Profile Information</h2>

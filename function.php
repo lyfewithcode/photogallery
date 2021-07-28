@@ -37,6 +37,9 @@
     }
 
     function get_avatar_image($user) {
+
+        $pic = 0;
+
         $upload_folder = "uploads";
         $user_folder = $upload_folder.'/'.$user;
         $avatar_image_folder = $user_folder.'/avatar';
@@ -65,11 +68,16 @@
         if($handle = opendir($avatar_image_folder)) {
             while(false !== ($entry = readdir($handle))) {
                 if(($entry != '.') and ($entry != '..')) {
+                    $pic = 1;
                     $avatar_image_path = $avatar_image_folder.'/'.$entry;
-                    echo "<img src=$avatar_image_path alt=$entry id=$avatar_image_id width='300px'>";
+                    echo "<img src=$avatar_image_path alt=$entry id='avatar-image-id' width='300px'>";
                 }
             }
             closedir($handle);
+        }
+
+        if($pic == 0) {
+            echo "<img src='img/user-default.jpg' id='avatar-image-id' width='300px'>";
         }
     }
 ?>

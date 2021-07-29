@@ -17,6 +17,35 @@ jQuery(document).ready(function() {
                 $("header").removeClass('transparent-bg')
             }
         }
-    })
+    });
+
+    $('#user-avatar-upload').on("change", function() {
+
+        var avatarfile = $(this)[0].files[0];
+        // alert (avatarfile.type);
+        var type = avatarfile.type;
+        // alert(type);
+        var type1 = type.substring(type.indexOf("/") + 1);
+        alert(type1);
+        var size = avatarfile.size;
+
+        if(type1 != "png" && type1 != "jpg" && type1 != "jpeg") {
+            alert('file type is not supported');
+        } else if(size > 500000) {
+            alert('file size should be less then 500 Kb');
+        } else {
+            var formdata = new FormData();
+            formdata.append('avatar', avatarfile);
+            var xhr = new XMLHttpRequest;
+            xhr.addEventListener("load", avatarloadedhandler, false);
+            xhr.open('POST', 'avatarchange.php');
+            xhr.send(formdata);
+            
+            function avatarloadedhandler(evt) {
+                alert(evt.target.responseText);
+            }
+
+        }
+    });
 
 });

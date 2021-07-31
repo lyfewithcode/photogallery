@@ -70,9 +70,8 @@ jQuery(document).ready(function() {
             xhr.send(formdata);
             
             function loadedhandler(evt) {
-                echo(evt.target.responseText);
+                $('#user-uploaded-pics').prepend("<div class='col-md-4'><img src='+evt.terget.responseText+'></div>");
             }
-
         }
     });
 

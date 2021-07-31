@@ -35,5 +35,15 @@
     </form>
 </section>
 <section class="user-gallery">
+    <div class="section-header center">
+        <h2>Your Uploaded Images</h2>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div id="user-uploaded-pics">
+                <?php get_user_uploaded_pics($session); ?>
+            </div>
+        </div>
+    </div>
 
 </section>

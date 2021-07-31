@@ -162,3 +162,10 @@ input[type=submit] {
 .profile-information {
     margin-top: 30px;
 }
+
+/* for user gallery */
+
+#user-uploaded-pics img {
+    width: 100%;
+    height: 265px;
+}

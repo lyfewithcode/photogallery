@@ -80,4 +80,25 @@
             echo "<img src='img/user-default.jpg' id='avatar-image-id' width='300px'>";
         }
     }
+
+    function get_user_uploaded_pics($username) {
+
+        $conn = @mysqli_connect('localhost', 'root', '', 'photogallery');
+
+        $query = "SELECT * FROM pics WHERE username = '$username' ORDER BY pid DESC";
+        $query_run = mysqli_query($conn, $query);
+
+        if(mysqli_num_rows($query_run) > 0) {
+            while($row = mysqli_fetch_assoc($query_run)) {
+                $picid = $row['pid'];
+                $picname = $row['picname'];
+                $path = 'uploads/'.$username.'/'.$picname;
+                ?>
+                    <div class="col-md-4">
+                        <img src="<?php echo $path; ?>">
+                    </div>
+                <?php 
+            }
+        }
+    }
 ?>

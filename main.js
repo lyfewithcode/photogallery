@@ -48,4 +48,32 @@ jQuery(document).ready(function() {
         }
     });
 
+    $('#new-image').on("change", function() {
+
+        var file = $(this)[0].files[0];
+        var type = file.type;
+        // alert(type);
+        var type1 = type.substring(type.indexOf("/") + 1);
+        // alert(type1);
+        var size = file.size;
+
+        if(type1 != "png" && type1 != "jpg" && type1 != "jpeg") {
+            alert('file type is not supported');
+        } else if(size > 500000) {
+            alert('file size should be less then 500 Kb');
+        } else {
+            var formdata = new FormData();
+            formdata.append('file1', file);
+            var xhr = new XMLHttpRequest;
+            xhr.addEventListener("load", loadedhandler, false);
+            xhr.open('POST', 'fileupload.php');
+            xhr.send(formdata);
+            
+            function loadedhandler(evt) {
+                echo(evt.target.responseText);
+            }
+
+        }
+    });
+
 });

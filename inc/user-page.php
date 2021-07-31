@@ -27,7 +27,12 @@
     </div>
 </section>
 <section class="upload-image">
-    
+    <div class="section-header canter">
+        <h2>Upload New Image</h2>
+    </div>
+    <form method="post" enctype="multipart/form-data" name="upload-image">
+        <input type="file" name="new-image" id="new-image">
+    </form>
 </section>
 <section class="user-gallery">
 

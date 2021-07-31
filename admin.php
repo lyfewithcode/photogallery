@@ -27,4 +27,6 @@
     else {
         include 'inc/admin-content.php';
     }
+
+    include 'inc/footer.php';
 ?>

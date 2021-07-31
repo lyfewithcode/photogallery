@@ -101,4 +101,38 @@
             }
         }
     }
+
+    // admin-content
+    function get_unapproved_pics() {
+
+        $conn = @mysqli_connect('localhost', 'root', '', 'photogallery');
+        
+        $approved = 0;
+        $query = "SELECT * FROM pics WHERE approved = '$approved'";
+        $query_run = mysqli_query($conn, $query);
+
+        if(mysqli_num_rows($query_run) > 0) {
+            while($row = mysqli_fetch_assoc($query_run)) {
+                $pid = $row['pid'];
+                $picname = $row['picname'];
+                $uname = $row['username'];
+                $src = 'uploads/'.$uname.'/'.$picname;
+                ?>
+                    <div id='row-<?php echo $pid; ?>'>
+                        <div class='col-md-4'>
+                            <img src='<?php echo $src; ?>' id='<?php echo $pid; ?>'>
+                        </div>
+                        <div class='col-md-4'>
+                            <?php echo $picname; ?>
+                        </div>
+                        <div class='col-md-4'>
+                            <button id='yes-<?php echo $pid; ?>' onclick='approveimage(<?php echo $pid; ?>)'>Yes</button>
+                            <button id='no-<?php echo $pid; ?>' onclick='deleteimage(<?php echo $pid; ?>)'>No</button>
+                        </div>
+                    </div>
+                    <div class='clearfix'></div>
+                <?php
+            }
+        }
+    }
 ?>

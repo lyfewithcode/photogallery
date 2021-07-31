@@ -76,3 +76,29 @@ jQuery(document).ready(function() {
     });
 
 });
+
+function approveimage(id) {
+    var rowid = "row-" + id;
+    $.ajax({
+        url: 'approve.php',
+        data: {id:id},
+        type: 'post',
+        success: function(result) {
+            $('#row-' + id).hide(2000);
+            // alert(result);
+        }
+    });
+}
+
+function deleteimage(id) {
+    var rowid = "row-" + id;
+    $.ajax({
+        url: 'delete.php',
+        data: {id:id},
+        type: 'post',
+        success: function(result) {
+            $('#row-' + id).hide(2000);
+            // alert(result);
+        }
+    });
+}

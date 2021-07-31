@@ -169,3 +169,15 @@ input[type=submit] {
     width: 100%;
     height: 265px;
 }
+
+/* gallery image */
+
+.gallery-image {
+    width: 100%;
+    height: 300px;
+}
+
+.gallery-image img {
+    width: 100%;
+    height: 100%;
+}

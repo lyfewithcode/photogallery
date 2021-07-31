@@ -1,6 +1,58 @@
 <?php
     include 'inc/db.inc.php';
 
+    function get_gallery_content() {
+        if(isset($_GET['page'])) {
+            $page = (int)$_GET['page'];
+        } else {
+            $page = $_GET['page'] = 1;
+        }
+
+        if(isset($_GET['per_page']) && $_GET['per_page'] < 21) {
+            $per_page = $_GET['per_page'];
+        } else {
+            $per_page = 3;
+        }
+
+        $conn = @mysqli_connect('localhost', 'root', '', 'photogallery');
+
+        $approved = 1;
+        $total_query = "SELECT * FROM pics WHERE approved = '$approved'";
+        $total = mysqli_num_rows(mysqli_query($conn, $total_query));
+        $pages = ceil($total / $per_page);
+        // echo $pages;
+        $start = ($page * $per_page) - $per_page;
+        // echo $start;
+
+        $query = "SELECT * FROM pics WHERE approved = '$approved' LIMIT $start, $per_page";
+        $query_run = mysqli_query($conn, $query);
+        
+        if(mysqli_num_rows($query_run) > 0) {
+            while($row = mysqli_fetch_assoc($query_run)) {
+                $picname = $row['picname'];
+                $pid = $row['pid'];
+                $author = $row['username'];
+                $src = 'uploads/'.$author.'/'.$picname;
+                ?>
+                    <div class='col-md-4'>
+                        <div class='gallery-image'>
+                            <img src='<?php echo $src; ?>' class='front'>
+                            <div class='back'>
+                                <div class='back-content'>
+                                    <h3><?php echo $picname; ?></h3>
+                                    <h6><i>by</i> <?php echo $author ?></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php 
+            }
+        }
+        ?>
+            <div class='clearfix'></div>
+        <?php
+    }
+
     function get_profile_info($username) {
         $fname = "";
         $lname = "";

@@ -50,6 +50,15 @@
         }
         ?>
             <div class='clearfix'></div>
+            <div id='pagination'>
+                <?php
+                    for($i = 1; $i <= $pages; $i ++) {
+                        ?>
+                            <a href="?page=<?php echo $i.'&per_page='.$per_page; ?>">Page<?php echo $i; ?></a>
+                        <?php
+                    }
+                ?>
+            </div>
         <?php
     }
 

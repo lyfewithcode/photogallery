@@ -26,7 +26,7 @@ jQuery(document).ready(function() {
         var type = avatarfile.type;
         // alert(type);
         var type1 = type.substring(type.indexOf("/") + 1);
-        alert(type1);
+        // alert(type1);
         var size = avatarfile.size;
 
         if(type1 != "png" && type1 != "jpg" && type1 != "jpeg") {
@@ -42,7 +42,7 @@ jQuery(document).ready(function() {
             xhr.send(formdata);
             
             function avatarloadedhandler(evt) {
-                alert(evt.target.responseText);
+                $('#avatar-image-id').attr('src', evt.target.responseText);
             }
 
         }

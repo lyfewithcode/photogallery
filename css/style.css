@@ -224,6 +224,7 @@ input[type=submit] {
     width: 0%;
     height: 0%;
     border: 2px solid transparent;
+    z-index: -2;
 }
 
 .back-content:before {

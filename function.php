@@ -41,6 +41,7 @@
                                 <div class='back-content'>
                                     <h3><?php echo $picname; ?></h3>
                                     <h6><i>by</i> <?php echo $author ?></h6>
+                                    <a href="<?php echo $src; ?>" data-lightbox="gallery"><i class="fa fa-expand"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -59,6 +60,12 @@
                     }
                 ?>
             </div>
+            <script type="text/javascript">
+                lightbox.option({
+                    'resizeDuration': 200,
+                    'wrapAround': true
+                    })
+            </script>
         <?php
     }
 

@@ -1,6 +1,64 @@
 <?php
     include 'inc/db.inc.php';
 
+    function get_top_uploaders() {
+
+        $conn = @mysqli_connect('localhost', 'root', '', 'photogallery');
+
+        $limit = 3;
+        $query = "SELECT * FROM users ORDER BY uploads DESC LIMIT $limit";
+        $query_run = mysqli_query($conn, $query);
+
+        if(mysqli_num_rows($query_run) > 0) {
+            while($row = mysqli_fetch_assoc($query_run)) {
+                $pic = 0;
+                
+                $author = $row['username'];
+                $avatar_image_folder = 'uploads/'.$author.'/avatar';
+                
+                /** file handling */
+                if($handle = opendir($avatar_image_folder)) {
+                    while(false !== ($entry = readdir($handle))) {
+                        if(($entry != '.') and ($entry != '..')) {
+                            $pic = 1;
+                            $avatar_image_path = $avatar_image_folder.'/'.$entry;
+                            ?>
+                                <div class='col-md-4'>
+                                    <div class='gallery-image'>
+                                        <img src='<?php echo $avatar_image_path; ?>' class='front'>
+                                        <div class='back'>
+                                            <div class='back-content'>
+                                                <h3><?php echo $author; ?></h3>
+                                                <h6><i>No of Uploads:</i> <?php echo $row['uploads']; ?></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php
+                        }
+                    }
+                    closedir($handle);
+                }
+        
+                if($pic == 0) {
+                    ?>
+                        <div class='col-md-4'>
+                            <div class='gallery-image'>
+                                <img src='img/user-default.jpg' class='front'>
+                                <div class='back'>
+                                    <div class='back-content'>
+                                        <h3><?php echo $author; ?></h3>
+                                        <h6><i>No of Uploads</i> <?php echo $row['uploads']; ?></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
+                }
+            }
+        }
+    }
+
     function get_recent_pics() {
 
         $conn = @mysqli_connect('localhost', 'root', '', 'photogallery');

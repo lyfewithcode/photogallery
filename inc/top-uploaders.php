@@ -1,3 +1,10 @@
-<section class="top-uploaders">
-
+<section class="top-uploaders" id="top-uploaders">
+    <div class="section-header">
+        <h1 class="center">Top Uploaders</h1>
+    </div>
+    <div class="container">
+        <div class="row">
+            <?php get_top_uploaders(); ?>
+        </div>
+    </div>
 </section>

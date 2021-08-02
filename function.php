@@ -1,6 +1,39 @@
 <?php
     include 'inc/db.inc.php';
 
+    function get_recent_pics() {
+
+        $conn = @mysqli_connect('localhost', 'root', '', 'photogallery');
+
+        $limit = 3;
+        $query = "SELECT * FROM pics ORDER BY pid DESC LIMIT $limit";
+        $query_run = mysqli_query($conn, $query);
+
+        if(mysqli_num_rows($query_run) > 0) {
+            while($row = mysqli_fetch_assoc($query_run)) {
+                $picname = $row['picname'];
+                $pid = $row['pid'];
+                $author = $row['username'];
+                $src = 'uploads/'.$author.'/'.$picname;
+
+                ?>
+                    <div class='col-md-4'>
+                        <div class='gallery-image'>
+                            <img src='<?php echo $src; ?>' class='front'>
+                            <div class='back'>
+                                <div class='back-content'>
+                                    <h3><?php echo $picname; ?></h3>
+                                    <h6><i>by</i> <?php echo $author ?></h6>
+                                    <a href="<?php echo $src; ?>" data-lightbox="gallery"><i class="fa fa-expand"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php
+            }
+        }
+    }
+
     function get_home_gallery_content($x) {
 
         $conn = @mysqli_connect('localhost', 'root', '', 'photogallery');
